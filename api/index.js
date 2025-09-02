@@ -30,7 +30,7 @@ app.get('/users/username/:username', (req, res) => {
     }
 })
 
-// Change to fit user input to make post request
+
 app.post('/users', async (req, res) => {
     const { first_name, last_name, username, password } = req.body;
 
@@ -39,13 +39,12 @@ app.post('/users', async (req, res) => {
     }
 
     try {
-        // Check for existing user
+        
         const existingUser = await knex('users').where('username', username).first();
         if (existingUser) {
             return res.status(409).json({ message: 'User already exists' });
         }
 
-        // Insert new user
         const inserted = await knex('users').insert({
             first_name,
             last_name,
@@ -55,7 +54,7 @@ app.post('/users', async (req, res) => {
 
         return res.status(201).json({
             message: 'User created successfully',
-            userId: inserted[0] // In Postgres this is the ID
+            userId: inserted[0]
         });
 
     } catch (err) {
@@ -64,27 +63,6 @@ app.post('/users', async (req, res) => {
     }
 });
 
-// Add stuff to make work
-app.patch('/users', (req, res) => {
-    knex('users')
-        .where({})
-        .update({})
-        .then(() => {
-            res.status(204)
-            res.send('Patched')
-        })
-})
-
-// Add stuff to make work
-app.delete('/users', (req, res) => {
-    knex('users')
-        .where({})
-        .del()
-        .then(() => {
-            res.status(200)
-            res.send('Deleted')
-        })
-})
 
 // Add stuff to make work
 app.get('/items', function (req, res) {

@@ -20,8 +20,7 @@ function App() {
       <AppContext value={{ username, setUsername, isLoggedIn, setIsLoggedIn }}>
         <Routes>
           <Route path="/" element={<Login />} />
-          {/* <Route path="/users" element={<Users />} />
-          <Route path="/items/:id" element={<Items />} /> */}
+          {/* <Route path="/items/:id" element={<Items />} /> */}
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </AppContext>
