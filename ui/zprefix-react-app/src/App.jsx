@@ -1,24 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext, createContext } from 'react'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import Login from './Login.jsx';
+import SignUp from './Signup.jsx';
+// import Users from './Users.jsx';
+// import Items from './Items.jsx';
+
+export const AppContext = createContext(null);
+
+
 
 function App() {
-  const [ users, setUsers ] = useState([]);
-  const [ items, setItems ] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:8000/inventory')
-      .then(res => res.json())
-      .then(data => setUsers(data))
-  },[])
-  if(users.length < 1) return <p>Loading...</p>
+  const [username, setUsername] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <ul>
-        {users.map(userData =>(
-          <li key={userData.id}>{userData.description}</li>
-        ))}
-      </ul>
+      <AppContext value={{ username, setUsername, isLoggedIn, setIsLoggedIn }}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          {/* <Route path="/users" element={<Users />} />
+          <Route path="/items/:id" element={<Items />} /> */}
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </AppContext>
     </>
   )
 }
