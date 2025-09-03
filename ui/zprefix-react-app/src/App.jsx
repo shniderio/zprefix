@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from './Login.jsx';
 import SignUp from './Signup.jsx';
-// import Users from './Users.jsx';
-// import Items from './Items.jsx';
+import Items from './Items.jsx';
 
 export const AppContext = createContext(null);
 
@@ -20,7 +19,7 @@ function App() {
       <AppContext value={{ username, setUsername, isLoggedIn, setIsLoggedIn }}>
         <Routes>
           <Route path="/" element={<Login />} />
-          {/* <Route path="/items/:id" element={<Items />} /> */}
+          <Route path="/items" element={<Items />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </AppContext>

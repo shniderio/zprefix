@@ -62,12 +62,16 @@ function Login() {
                             alert("incorect password")
                         } else {
                             setIsLoggedIn(true)
-                            navigate('/users')
+                            navigate('/items')
                         }
                     }
                 });
             });
         return
+    }
+
+    function handleAllItems() {
+        navigate('/items')
     }
     return (
         <>
@@ -89,6 +93,11 @@ function Login() {
             shadow-sm hover:bg-gray-50 hover:border-gray-400
             active:bg-gray-100 transition-all"
                         onClick={() => handleSubmit()}>Submit</button>
+                    <button className="bg-white text-gray-700 border border-gray-300
+            rounded-md px-3 py-1 text-sm font-medium
+            shadow-sm hover:bg-gray-50 hover:border-gray-400
+            active:bg-gray-100 transition-all"
+                        onClick={() => handleAllItems()}>Browse all Items</button>
                 </div>
             </div>
         </>
