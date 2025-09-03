@@ -76,11 +76,11 @@ function Login() {
     return (
         <>
             <div className="login-header flex justify-self-center gap-50 text-align-center mt-25">
-                <h2>myAttendanceScanner</h2>
+                <h1>Inventory Manager</h1>
             </div>
             <div className="login-page bg-white dark:bg-gray-800 gap-y-3 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 mt-50">
-                <h1>Login:</h1>
-                <input className="border rounded-sm" type="email" name="email" placeholder=" Enter Email " onChange={e => setUsername(e.target.value)}></input>
+                <h3>Login:</h3>
+                <input className="border rounded-sm" type="email" name="email" placeholder=" Enter Username " onChange={e => setUsername(e.target.value)}></input>
                 <input className="border rounded-sm" type="password" name="password" placeholder=" Enter Password " onChange={e => setPassword(e.target.value)}></input>
                 <div className="flex justify-center gap-6 mt-4">
                     <button className="bg-white text-gray-700 border border-gray-300

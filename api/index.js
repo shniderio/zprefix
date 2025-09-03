@@ -65,16 +65,25 @@ app.post('/users', async (req, res) => {
 
 
 // Add stuff to make work
-app.get('/items', function (req, res) {
-    knex('items')
-        .select('*')
-        .then(data => res.status(200).json(data))
-        .catch(err =>
-            res.status(404).json({
-                message:
-                    'no here'
-            })
-        );
+app.get('/items', async (req, res) => {
+    // knex('items')
+    //     .select('*')
+    //     .then(data => res.status(200).json(data))
+    //     .catch(err =>
+    //         res.status(404).json({
+    //             message:
+    //                 'no here'
+    //         })
+    //     );
+    try {
+        const data = await knex('items')
+            .join('users', 'items.user_id', '=', 'users.id')
+            .select('items.*', 'users.username');
+            res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: 'Database error'});
+    }
 });
 
 // Add stuff to make work
