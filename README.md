@@ -36,3 +36,5 @@
         - you can hit the back button on this page to return to your inventory.
         - you can hit the logout button to return to the login page. 
         - you can then navigate to the browse all items button as an unauthed user to view the items but cannot delete.
+
+    EXTRA: sometimes it gets hung up on login initially and kills the server. restart the server and it should work from then on out.
