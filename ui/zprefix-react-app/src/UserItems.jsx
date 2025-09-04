@@ -139,7 +139,7 @@ function UserItems() {
                                 />
                             ) : (
                                 <>
-                                    <p><strong>Item Name: </strong>{item.item_name}<strong>Description: </strong> {item.description} <strong>Quantity: </strong>{item.quantity}</p>
+                                    <p><strong>Item ID: </strong> {item.id}<strong> Item Name: </strong>{item.item_name}<strong> Description: </strong> {item.description} <strong> Quantity: </strong>{item.quantity}</p>
                                     <div className="mt-2 space-x-2">
                                         <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" onClick={() => setEditItemId(item.id)}>Edit</button>
                                         <DeleteItem itemId={item.id} onDelete={handleItemDeleted} />
