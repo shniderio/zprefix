@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    justify-self: center;
+    justify-content: center;
+}
+
+.login-header {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+}
+
+h1 {
+    align-self: center;
+}

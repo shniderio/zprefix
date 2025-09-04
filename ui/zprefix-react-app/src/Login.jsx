@@ -1,3 +1,4 @@
+import './Login.css';
 import { useContext, useEffect, useState } from 'react';
 import bcrypt from "bcryptjs";
 import { AppContext } from './App.jsx';
@@ -10,33 +11,6 @@ function Login() {
     const navigate = useNavigate();
 
     function handleSignUp() {
-        // bcrypt.hash(password, 12, function (err, hash) {
-        //     if (err) {
-        //         console.log(err)
-        //     } else {
-        //         setHashedPassword(hash)
-        //     }
-        //     const userToAdd = { 'username': username, 'password': hash };
-        //     fetch("http://localhost:8000/users", {
-        //         method: 'POST',
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(userToAdd)
-        //     })
-        //         .then(res => {
-        //             if (!res.ok) {
-        //                 return res.json().then(errorData => {
-        //                     throw new Error(errorData.message);
-        //                 });
-        //             } else {
-        //                 return res.json();
-        //             }
-        //         })
-        //         .then(data => {
-        //             console.log('User added', data);
-        //             alert('User added')
-        //         })
-        // });
-        // return
         navigate('/signup')
     }
     function handleSubmit() {
@@ -62,6 +36,8 @@ function Login() {
                             alert("incorect password")
                         } else {
                             setIsLoggedIn(true)
+                            // localStorage.setItem('username', username);
+                            localStorage.setItem('user', JSON.stringify(user[0]));
                             navigate('/items')
                         }
                     }
@@ -71,7 +47,7 @@ function Login() {
     }
 
     function handleAllItems() {
-        navigate('/items')
+        navigate('/allitems')
     }
     return (
         <>

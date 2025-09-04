@@ -39,7 +39,7 @@ app.post('/users', async (req, res) => {
     }
 
     try {
-        
+
         const existingUser = await knex('users').where('username', username).first();
         if (existingUser) {
             return res.status(409).json({ message: 'User already exists' });
@@ -66,57 +66,93 @@ app.post('/users', async (req, res) => {
 
 // Add stuff to make work
 app.get('/items', async (req, res) => {
-    // knex('items')
-    //     .select('*')
-    //     .then(data => res.status(200).json(data))
-    //     .catch(err =>
-    //         res.status(404).json({
-    //             message:
-    //                 'no here'
-    //         })
-    //     );
     try {
         const data = await knex('items')
             .join('users', 'items.user_id', '=', 'users.id')
             .select('items.*', 'users.username');
-            res.status(200).json(data);
+        res.status(200).json(data);
     } catch (err) {
         console.error(err);
-        res.status(500).json({message: 'Database error'});
+        res.status(500).json({ message: 'Database error' });
+    }
+});
+
+app.get("/items/user/:username", async (req, res) => {
+    const { username } = req.params;
+    console.log(`Fetching items for username: ${username}`);
+
+    try {
+        const user = await knex("users").where({ username }).first();
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const items = await knex("items").where({ user_id: user.id });
+        res.status(200).json(items);
+    } catch (err) {
+        console.error("Error fetching user items:", err);
+        res.status(500).json({ message: "Error fetching user items", error: err.message });
     }
 });
 
 // Add stuff to make work
-app.post('/items', (req, res) => {
-    knex('items')
-        .insert({})
-        .then(() => {
-            res.status(201)
-            res.send('Updated')
+app.post('/items', async (req, res) => {
+    try {
+        const { username, item_name, description, quantity } = req.body;
+
+        if (!username || !item_name || !description || !quantity) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const user = await knex('users').where({ username }).first();
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        const [newItem] = await knex('items').insert({
+            user_id: user.id,
+            item_name,
+            description,
+            quantity
         })
-})
+            .returning('*');
+
+        res.status(201).json(newItem)
+    } catch (err) {
+        console.error("Database insert error:", err);
+        res.status(500).json({ message: 'Database error', error: err.message });
+    }
+});
 
 // Add stuff to make work
-app.patch('/items', (req, res) => {
-    knex('items')
-        .where({})
-        .update({})
-        .then(() => {
-            res.status(204)
-            res.send('Patched')
-        })
-})
+app.patch('/items/:id', async (req, res) => {
+    const { id } = req.params;
+    const { item_name, description, quantity } = req.body;
+
+    try {
+        const [updatedItem] = await knex('items')
+            .where({ id })
+            .update({ item_name, description, quantity })
+            .returning('*');
+
+        if (!updatedItem) return res.status(404).json({ message: "No item here" });
+        res.json(updatedItem);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Database error again" });
+    }
+});
 
 // Add stuff to make work
-app.delete('/items', (req, res) => {
-    knex('items')
-        .where({})
-        .del()
-        .then(() => {
-            res.status(200)
-            res.send('Deleted')
-        })
-})
+app.delete('/items/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deleted = await knex('items').where({ id }).del();
+        if (!deleted) return res.status(404).json({ message: "Item no here" });
+        res.json({ message: "Item deleted" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Another database error you must figure out... again..."})
+    }
+});
 
 app.get('/', (req, res) => {
     res.send('App is up and running.')
