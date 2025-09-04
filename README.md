@@ -14,7 +14,25 @@
     1. Open terminal and Navigate to api
         - 'npm i' to install require packages
         - 'npm run start' to run the api and express server
-    2. Open new terminal and navigate to ui
-        - npm i
-        - navigate to zprefix-react-app
-        - 
+    2. Open new terminal and navigate to api
+        - 'docker pull postgres'
+        - 'docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres'
+        - 'docker ps -a' to see the name of the docker container
+        - 'docker exec -it pg-docker bash
+        - 'psql -U postgres' to log in with the username 
+        - 'create database inventory;' to create the required database for the app to run 
+    3. Open new terminal and navigate to ui/zprefix-react-app
+        - 'npm i'
+        - 'npm run dev'
+        - open link to use app
+    4. Open new terminal and navigate to api
+        - 'npx knex migrate:latest'
+        - 'npx knex seed:run'
+    5. When you are on the app, you are able to navigate and use the app. 
+        - sign up will let you create an account
+        - you can log in with the created account or use 'user1' and 'password1'
+        - when you hit submit you are redirected to the users inventory where you can view, create, edit, and delete items
+        - you can click the browse all items button to see everything created and delete them if you are logged in.
+        - you can hit the back button on this page to return to your inventory.
+        - you can hit the logout button to return to the login page. 
+        - you can then navigate to the browse all items button as an unauthed user to view the items but cannot delete.
