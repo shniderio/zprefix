@@ -15,14 +15,6 @@ function App() {
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   const savedUsername = localStorage.getItem('username');
-  //   if(savedUsername) {
-  //     setUsername(savedUsername);
-  //     setIsLoggedIn(true);
-  //   }
-  // },[]);
-
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {

@@ -29,6 +29,7 @@ function Items() {
                 <table className="border w-2/3 mx-auto mt-0">
                     <thead>
                         <tr>
+                            <th className="border px-2 py-1">Item ID</th>
                             <th className="border px-2 py-1">Created By</th>
                             <th className="border px-2 py-1">Item Name</th>
                             <th className="border px-2 py-1">Item Description</th>
@@ -39,6 +40,7 @@ function Items() {
                     <tbody>
                         {items.map((item, index) => (
                             <tr key={item.id} className="border">
+                                <td className="border px-2 py-1">{item.id}</td>
                                 <td className="border px-2 py-1">{item.username}</td>
                                 <td className="border px-2 py-1">{item.item_name}</td>
                                 <td className="border px-2 py-1">{item.description}</td>
