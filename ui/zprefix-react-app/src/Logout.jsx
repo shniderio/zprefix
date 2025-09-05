@@ -14,7 +14,7 @@ function LogoutButton() {
     }
 
     return(
-        <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onClick={handleLogout}>Logout</button>
+        <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 absolute top-5 right-5" onClick={handleLogout}>Logout</button>
     );
 }
 

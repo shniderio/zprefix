@@ -119,10 +119,7 @@ function UserItems() {
     return (
         <div className='p-6'>
             <h1 className="text-2xl font-bold mb-4">{username}'s Items</h1>
-            <button className="bg-white text-gray-700 border border-gray-300
-            rounded-md px-3 py-1 text-sm font-medium
-            shadow-sm hover:bg-gray-50 hover:border-gray-400
-            active:bg-gray-100 transition-all"
+            <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                 onClick={() => handleAllItems()}>Browse all Items</button>
             <LogoutButton />
             {userItems.length === 0 ? (
